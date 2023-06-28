@@ -4,11 +4,10 @@ from io import BytesIO
 from navertts import NaverTTS
 from pydub import AudioSegment
 from pydub.playback import play
-import gtts
+import requests
 
 r = sr.Recognizer()
-
-microphone = sr.Microphone()
+microphone = sr.Microphone()  # 대부분의 경우 device_index 생략 가능
 
 
 def rule_based_answer(ai_answer):
@@ -48,6 +47,27 @@ while True:
         elif "날짜" in user_command:
             today = datetime.today()
             ai_answer = f"오늘은 {today.year}년 {today.month}월 {today.day}일 입니다."
+        elif "날씨" in user_command:
+            API_KEY = "YourKeyHere"
+            BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
+            LANGUAGE = "kr"
+
+            request_url = f"{BASE_URL}?appid={API_KEY}&q={city}&lang={LANGUAGE}"
+
+            response = requests.get(request_url)
+
+            if response.status_code == 200: # HTTP status 200은 성공을 의미합니다.
+
+                data = response.json()
+                city_name = data['name']
+                weather = data['weather'][0]['description']
+                temperature = round(data["main"]["temp"] - 273.15, 2) # 켈빈 온도 사용
+                
+                ai_answer = f"현재 {city_name}의 날씨는 {weather} 입니다. 온도는 {temperature} 도 입니다."
+
+            else:
+                print("날씨 정보를 얻지 못했습니다.")
+
         else:
             ai_answer = "알 수 없는 명령입니다."
 
