@@ -1,6 +1,9 @@
+.DS_Store
+config.py
+__pycache__
+.ipynb_checkpoints
+
 # GTZAN dataset
 2.music_gerne_classification/1.MGR_GTZANdataset/GTZAN_dataset
 2.music_gerne_classification/1.MGR_GTZANdataset/__pycache__
 2.music_gerne_classification/Data.zip
-
-.DS_Store

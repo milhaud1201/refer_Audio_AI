@@ -7,6 +7,7 @@ from pydub import AudioSegment
 from pydub.playback import play
 import requests
 from collections.abc import Callable
+import config
 
 
 def speech_to_text() -> str:
@@ -103,7 +104,7 @@ def report_weather(user_command: str) -> None:
         user_command (str): 도시 이름을 찾아볼 사용자 명령문
     """
 
-    API_KEY = "40e51cdf0433bc2b0411cead017e6c24"
+    API_KEY = config.api_key
     BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
     LANGUAGE = "kr"
 
