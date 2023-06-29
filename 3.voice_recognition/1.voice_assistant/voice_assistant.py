@@ -174,18 +174,17 @@ def listen_and_report(command_callbacks: dict[str, Callable[[str], None]]) -> bo
         bool: 프로그램을 계속 진행할 경우 True, 종료할 경우 False
     """
     # user_command = speech_to_text()
-    user_command = "로스엔젤레스 날짜 알려줘"
-    key = find_keyword(command_callbacks.keys(), user_command, "서울")
+    user_command = "로스앤젤레스와 서울의 시간과 날씨를 알려주세요."
 
-    if user_command == "종료":
-        ai_answer = "종료합니다."
-        text_to_speech(ai_answer)
+    if "종료" in user_command:
+        text_to_speech("종료합니다.")
         return False
-    elif key in user_command:
-        command_callbacks[key](user_command)
+
+    elif keyword := find_keyword(command_callbacks.keys(), user_command):
+        command_callbacks[keyword](user_command)
         return True
     else:
-        ai_answer = "알 수 없는 명령입니다."
+        text_to_speech("알 수 없는 명령입니다.")
         return True
 
 
@@ -196,6 +195,4 @@ command_callbacks = {
 }
 
 while listen_and_report(command_callbacks):
-    if listen_and_report(command_callbacks) == False:
-        break
     continue
