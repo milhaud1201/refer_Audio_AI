@@ -7,3 +7,7 @@ __pycache__
 2.music_gerne_classification/1.MGR_GTZANdataset/GTZAN_dataset
 2.music_gerne_classification/1.MGR_GTZANdataset/__pycache__
 2.music_gerne_classification/Data.zip
+
+# SepFormer_model
+4.audio_source_separation/1.SepFormer_model/audio_cache
+4.audio_source_separation/1.SepFormer_model/pretrained_models
